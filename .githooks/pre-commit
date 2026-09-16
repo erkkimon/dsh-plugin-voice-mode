@@ -1,0 +1,14 @@
+#!/bin/sh
+# Fast local gate. The suite is dependency-free node:test and finishes in
+# well under a second, so it runs on every commit — no reason to defer it to
+# pre-push the way a multi-thousand-test suite would.
+#
+# Committed hooks are inert until git is pointed at them. In a fresh clone:
+#     git config core.hooksPath .githooks
+#
+# WHY not husky, which is what the bigger repos here use: husky activates from
+# a `prepare` script during `npm install`, and this repo has no dependencies
+# and no node_modules to install. A committed hook plus one git config line is
+# the same guarantee without adding a dependency and a lockfile to a plugin
+# that ships as a bare tarball.
+exec npm test

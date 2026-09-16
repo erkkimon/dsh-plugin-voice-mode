@@ -1,0 +1,30 @@
+name: Test
+
+# The automated gate that is NOT on somebody's laptop. .githooks/pre-commit
+# runs the same command locally, but only for whoever pointed git at it, so
+# this is the one that always runs.
+#
+# No install step and no lockfile: the suite is node:test from the standard
+# library and the plugin has no runtime dependencies, so there is nothing to
+# resolve. Keep it that way — a dependency here buys a lockfile and a cache
+# key for a suite that finishes in under a second.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm test
