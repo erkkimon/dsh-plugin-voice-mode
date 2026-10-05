@@ -6,7 +6,7 @@ The UI mirrors the voice UX of a mobile chat app: a big red record button stradd
 
 ## Features
 
-- **Push-to-talk everywhere** — hold the big red button, or hold **Right Alt / Right Option**; release to transcribe. A quick click *latches* recording on; click again to stop.
+- **Push-to-talk everywhere** — hold the big red button, or hold **Fn**; release to transcribe. (Fn reaches the browser on Macs and some keyboards; on many PC laptops the firmware swallows it, so use the button there. Right Alt was dropped because it is AltGr — `~`, `@` — on European layouts.) A quick click *latches* recording on; click again to stop.
 - **Swipe gestures on the button** — while holding, swipe up-right to send immediately, up-left to discard.
 - **Hands-free mode** — the mic listens continuously with an energy-based VAD; ~150 ms of speech starts a capture, an adjustable silence delay (default 5 s) ends it. A rolling 0.5 s pre-roll buffer means the first syllable is never clipped. Detection suspends automatically while TTS plays, so replies never loop back into the mic. An orbiting dot around the record button shows state (green = listening, red = capturing).
 - **The model knows what was dictated** — when a message includes dictated text, the model gets a hidden context note (source `voice-mode/dictation`) saying it is a speech transcript that may contain recognition errors, so it can read past mishearings and give a cleaned-up version if you ask it to repeat you. Your message text is never changed and the UI shows nothing; the note stays visible only in the session log. Typed-only messages get no note.
